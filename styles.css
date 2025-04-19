@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #e6f4e8;
+    padding: 1rem;
+  }
+  .header {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #14532d;
+  }
+  .search-box {
+    position: relative;
+    margin-top: 1rem;
+  }
+  .search-box input {
+    width: 100%;
+    padding: 0.5rem 0.75rem 0.5rem 2rem;
+    border-radius: 1rem;
+    border: 1px solid #d1d5db;
+  }
+  .search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    padding: 0.5rem;
+    position: relative;
+    text-align: center;
+  }
+  .card img {
+    height: 80px;
+    object-fit: contain;
+  }
+  .card .name {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-weight: 600;
+  }
+  .card .price {
+    color: #065f46;
+    font-weight: bold;
+  }
+  .card .old-price {
+    text-decoration: line-through;
+    font-size: 0.75rem;
+    color: #9ca3af;
+  }
+  .heart {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: #9ca3af;
+  }
+  .heart.liked {
+    color: #ec4899;
+  }
+  .bottom-nav {
+    position: fixed;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+  }
+  .bottom-nav button {
+    background: white;
+    border: none;
+    border-radius: 50%;
+    padding: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
