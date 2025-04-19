@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Shop</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 10px; }
+        .product { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 8px; }
+        .cart { position: fixed; bottom: 20px; right: 20px; background: #0088cc; color: white; padding: 10px; border-radius: 50%; }
+    </style>
+</head>
+<body>
+    <h1>Мой магазин</h1>
+    
+    <div id="products">
+        <!-- Товары будут загружаться здесь -->
+    </div>
+    
+    <div class="cart" onclick="openCart()">🛒 <span id="cart-count">0</span></div>
+    
+    <script>
+        // Инициализация Telegram WebApp
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+        
+        // Данные товаров
+        const products = [
+            { id: 1, name: "Товар 1", price: 100, description: "Описание товара 1" },
+            { id: 2, name: "Товар 2", price: 200, description: "Описание товара 2" },
+            { id: 3, name: "Товар 3", price: 300, description: "Описание товара 3" }
+        ];
+        
+        let cart = [];
+        
+        // Отображение товаров
+        function renderProducts() {
+            const container = document.getElementById('products');
+            container.innerHTML = '';
+            
+            products.forEach(product => {
+                const productEl = document.createElement('div');
+                productEl.className = 'product';
+                productEl.innerHTML = `
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <p><strong>Цена: ${product.price} руб.</strong></p>
+                    <button onclick="addToCart(${product.id})">Добавить в корзину</button>
+                `;
+                container.appendChild(productEl);
+            });
+        }
+        
+        // Добавление в корзину
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            cart.push(product);
+            updateCartCount();
+        }
+        
+        // Обновление счетчика корзины
+        function updateCartCount() {
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+        
+        // Открытие корзины
+        function openCart() {
+            if (cart.length === 0) {
+                alert('Корзина пуста');
+                return;
+            }
+            
+            let message = 'Ваш заказ:\n';
+            let total = 0;
+            
+            cart.forEach(item => {
+                message += `${item.name} - ${item.price} руб.\n`;
+                total += item.price;
+            });
+            
+            message += `\nИтого: ${total} руб.`;
+            
+            tg.showAlert(message);
+        }
+        
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', renderProducts);
+    </script>
+</body>
+</html>
